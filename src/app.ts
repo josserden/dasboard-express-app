@@ -1,6 +1,7 @@
 import express, { Express } from 'express';
 import { Server } from 'http';
 import { ErrorsService } from './errors/errors-service';
+import { ROUTES } from './helpers/routes';
 import { LoggerService } from './logger/logger-service';
 import { UserController } from './users/user-controller';
 
@@ -25,7 +26,7 @@ export class App {
   }
 
   useRoutes = () => {
-    this.app.use('/users', this.userController.router);
+    this.app.use(ROUTES.USERS, this.userController.router);
   };
 
   useHandleErrors = () => {

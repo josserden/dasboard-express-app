@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import { BaseController } from '../common/base-controller';
 import { HttpError } from '../errors/http-error';
+import { ROUTES } from '../helpers/routes';
 import { LoggerService } from '../logger/logger-service';
 
 export class UserController extends BaseController {
@@ -9,12 +10,12 @@ export class UserController extends BaseController {
     super(logger);
     this.bindRoutes([
       {
-        path: '/login',
+        path: ROUTES.LOGIN,
         method: 'post',
         func: this.login,
       },
       {
-        path: '/register',
+        path: ROUTES.REGISTER,
         method: 'post',
         func: this.register,
       },
