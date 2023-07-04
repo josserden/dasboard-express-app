@@ -1,7 +1,10 @@
 import express, { Express } from "express";
 import { Server } from "http";
-import { LoggerService } from "./logger/logger.service";
-import { userRouter } from "./users/users";
+
+import { LoggerService } from "logger/logger.service";
+import { userRouter } from "logger/users/users";
+
+import { DEFAULT_PORT } from "utils/constants";
 
 export class App {
   app: Express;
@@ -11,7 +14,7 @@ export class App {
 
   constructor({ logger }: { logger: LoggerService }) {
     this.app = express();
-    this.port = 8000;
+    this.port = DEFAULT_PORT;
     this.logger = logger;
   }
 
@@ -21,6 +24,7 @@ export class App {
 
   public async init() {
     this.useRoutes();
+
     this.server = this.app.listen(this.port, () => {
       this.logger.log(`Listening on port ${this.port}`);
     });

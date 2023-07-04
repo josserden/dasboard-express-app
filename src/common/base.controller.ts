@@ -1,7 +1,8 @@
 import { Router, Response } from "express";
-import { LoggerService } from "../logger/logger.service";
+import { LoggerService } from "logger/logger.service";
 
-import { IControllerRoute } from "./types";
+import { IControllerRoute } from "common/types";
+import { STATUS_CODES } from "utils/constants";
 
 export abstract class BaseController {
   private readonly _router: Router;
@@ -21,11 +22,11 @@ export abstract class BaseController {
   }
 
   public ok<T>(res: Response, message: T) {
-    return this.send(res, 200, message);
+    return this.send(res, STATUS_CODES.SUCCESS, message);
   }
 
   public created<T>(res: Response, message: T) {
-    return this.send(res, 201, message);
+    return this.send(res, STATUS_CODES.CREATED, message);
   }
 
   protected bindRoutes(routes: IControllerRoute[]) {

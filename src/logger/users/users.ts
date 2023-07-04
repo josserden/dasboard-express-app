@@ -2,11 +2,11 @@ import express from "express";
 
 const userRouter = express.Router();
 
-userRouter.post("/register", (req, res) => {
+userRouter.post("/register", (_, res) => {
   res.send("register");
 });
 
-userRouter.post("/login", (req, res) => {
+userRouter.post("/login", (_, res) => {
   res.send("login");
 });
 
