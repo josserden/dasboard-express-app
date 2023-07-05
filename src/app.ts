@@ -3,8 +3,9 @@ import { Server } from "http";
 
 import { LoggerService } from "logger/logger.service";
 import { userRouter } from "logger/users/users";
-
 import { DEFAULT_PORT } from "utils/constants";
+
+import { ILoggerService } from "types/logger.service.types";
 
 export class App {
   app: Express;
@@ -12,7 +13,7 @@ export class App {
   port: number;
   server: Server;
 
-  constructor({ logger }: { logger: LoggerService }) {
+  constructor({ logger }: ILoggerService) {
     this.app = express();
     this.port = DEFAULT_PORT;
     this.logger = logger;
