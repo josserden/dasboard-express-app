@@ -1,16 +1,14 @@
+import "reflect-metadata";
+
 import { App } from "app";
-import { LoggerService } from "logger/logger.service";
-import { UsersController } from "users/users.controller";
-import { ExceptionFilter } from "./errors/exception.filter";
+import { appBindings, appContainer } from "appBindings";
+import { TYPES } from "utils/constants";
 
-const bootstrap = async () => {
-  const logger = new LoggerService();
-  const userController = new UsersController(logger);
-  const exceptionFilter = new ExceptionFilter(logger);
-
-  const app = new App({ logger }, userController, exceptionFilter);
+const boostrap = async () => {
+  appContainer.load(appBindings);
+  const app = appContainer.get<App>(TYPES.App);
 
   await app.init();
 };
 
-bootstrap();
+boostrap();

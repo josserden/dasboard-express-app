@@ -11,3 +11,10 @@ export const ROUTES = {
   LOGIN: "/login",
   REGISTER: "/register",
 };
+
+export const TYPES = {
+  App: Symbol.for("App"),
+  ILogger: Symbol.for("ILogger"),
+  UsersController: Symbol.for("UsersController"),
+  ExceptionFilter: Symbol.for("ExceptionFilter"),
+};

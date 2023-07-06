@@ -1,11 +1,19 @@
+import { inject, injectable } from "inversify";
 import { NextFunction, Request, Response } from "express";
+
 import { BaseController } from "common/base.controller";
-import { LoggerService } from "logger/logger.service";
-import { ROUTES } from "utils/constants";
+import { ROUTES, TYPES } from "utils/constants";
 import { HttpError } from "errors/http-error";
 
-export class UsersController extends BaseController {
-  constructor(logger: LoggerService) {
+import { ILogger } from "interface/logger.interface";
+import { IUsersController } from "interface/users.controller.interface";
+
+@injectable()
+export class UsersController
+  extends BaseController
+  implements IUsersController
+{
+  constructor(@inject(TYPES.ILogger) logger: ILogger) {
     super(logger);
 
     this.bindRoutes([
