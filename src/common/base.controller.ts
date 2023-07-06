@@ -2,7 +2,7 @@ import { Router, Response } from "express";
 import { LoggerService } from "logger/logger.service";
 import { STATUS_CODE } from "utils/constants";
 
-import { IControllerRoute } from "types/base.controller.types";
+import { IControllerRoute } from "interface/base.controller.interface";
 
 export abstract class BaseController {
   private readonly _router: Router;

@@ -1,16 +1,16 @@
 import express, { Express } from "express";
 import { Server } from "http";
 
-import { LoggerService } from "logger/logger.service";
 import { UsersController } from "users/users.controller";
 import { DEFAULT_PORT, ROUTES } from "utils/constants";
+import { ExceptionFilter } from "errors/exception.filter";
 
-import { ILoggerService } from "types/logger.service.types";
-import { ExceptionFilter } from "./errors/exception.filter";
+import { ILoggerService } from "interface/logger.service.interface";
+import { ILogger } from "interface/logger.interface";
 
 export class App {
   app: Express;
-  logger: LoggerService;
+  logger: ILogger;
   port: number;
   server: Server;
   userController: UsersController;
