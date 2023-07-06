@@ -1,12 +1,12 @@
-import express, { Express } from "express";
-import { Server } from "http";
-import { inject, injectable } from "inversify";
+import express, { Express } from 'express';
+import { Server } from 'http';
+import { inject, injectable } from 'inversify';
 
-import { DEFAULT_PORT, ROUTES, TYPES } from "utils/constants";
-import { ExceptionFilter } from "errors/exception.filter";
-import { UsersController } from "users/users.controller";
+import { DEFAULT_PORT, ROUTES, TYPES } from 'utils/constants';
+import { ExceptionFilter } from 'errors/exception.filter';
+import { UsersController } from 'users/users.controller';
 
-import { ILogger } from "interface/logger.interface";
+import { ILogger } from 'interface/logger.interface';
 
 @injectable()
 export class App {
@@ -18,21 +18,21 @@ export class App {
     @inject(TYPES.ILogger) private logger: ILogger,
     @inject(TYPES.ExceptionFilter)
     private exceptionFilter: ExceptionFilter,
-    @inject(TYPES.UsersController) private userController: UsersController
+    @inject(TYPES.UsersController) private userController: UsersController,
   ) {
     this.app = express();
     this.port = DEFAULT_PORT;
   }
 
-  useRoutes() {
+  useRoutes(): void {
     this.app.use(ROUTES.USERS, this.userController.router);
   }
 
-  useExceptionFilter() {
+  useExceptionFilter(): void {
     this.app.use(this.exceptionFilter.catch.bind(this.exceptionFilter));
   }
 
-  public async init() {
+  public async init(): Promise<void> {
     this.useRoutes();
     this.useExceptionFilter();
 

@@ -7,14 +7,14 @@ export const STATUS_CODE = {
 };
 
 export const ROUTES = {
-  USERS: "/users",
-  LOGIN: "/login",
-  REGISTER: "/register",
+  USERS: '/users',
+  LOGIN: '/login',
+  REGISTER: '/register',
 };
 
 export const TYPES = {
-  App: Symbol.for("App"),
-  ILogger: Symbol.for("ILogger"),
-  UsersController: Symbol.for("UsersController"),
-  ExceptionFilter: Symbol.for("ExceptionFilter"),
+  App: Symbol.for('App'),
+  ILogger: Symbol.for('ILogger'),
+  UsersController: Symbol.for('UsersController'),
+  ExceptionFilter: Symbol.for('ExceptionFilter'),
 };

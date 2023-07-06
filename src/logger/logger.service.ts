@@ -1,7 +1,7 @@
-import { injectable } from "inversify";
-import { ISettingsParam, Logger } from "tslog";
+import { injectable } from 'inversify';
+import { ISettingsParam, Logger } from 'tslog';
 
-import { ILogger } from "interface/logger.interface";
+import { ILogger } from 'interface/logger.interface';
 
 @injectable()
 export class LoggerService implements ILogger {
@@ -11,7 +11,7 @@ export class LoggerService implements ILogger {
     this.logger = new Logger({
       displayInstanceName: false,
       displayLoggerName: false,
-      displayFilePath: "hidden",
+      displayFilePath: 'hidden',
       displayFunctionName: false,
     } as ISettingsParam<unknown>);
   }

@@ -1,10 +1,10 @@
-import { injectable } from "inversify";
-import { Router, Response } from "express";
+import { injectable } from 'inversify';
+import { Router, Response } from 'express';
 
-import { STATUS_CODE } from "utils/constants";
+import { STATUS_CODE } from 'utils/constants';
 
-import { IControllerRoute } from "interface/base.controller.interface";
-import { ILogger } from "interface/logger.interface";
+import { IControllerRoute } from 'interface/base.controller.interface';
+import { ILogger } from 'interface/logger.interface';
 
 @injectable()
 export abstract class BaseController {
@@ -18,21 +18,21 @@ export abstract class BaseController {
     return this._router;
   }
 
-  public send<T>(res: Response, code: number, message: T) {
-    res.type("application/json");
+  public send<T>(res: Response, code: number, message: T): Response<T> {
+    res.type('application/json');
 
     return res.status(code).send(message);
   }
 
-  public ok<T>(res: Response, message: T) {
+  public ok<T>(res: Response, message: T): Response<T> {
     return this.send(res, STATUS_CODE.SUCCESS, message);
   }
 
-  public created<T>(res: Response, message: T) {
+  public created<T>(res: Response, message: T): Response<T> {
     return this.send(res, STATUS_CODE.CREATED, message);
   }
 
-  protected bindRoutes(routes: IControllerRoute[]) {
+  protected bindRoutes(routes: IControllerRoute[]): void {
     routes.forEach(({ method, func, path }) => {
       this.logger.log(`Binding route ${method} ${path}`);
 
