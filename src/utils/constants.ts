@@ -6,4 +6,8 @@ export const STATUS_CODE = {
   UNAUTHORIZED: 401,
 };
 
-export const ROUTES = {};
+export const ROUTES = {
+  USERS: "/users",
+  LOGIN: "/login",
+  REGISTER: "/register",
+};

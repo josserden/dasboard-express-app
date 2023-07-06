@@ -7,7 +7,7 @@ import { IControllerRoute } from "types/base.controller.types";
 export abstract class BaseController {
   private readonly _router: Router;
 
-  constructor(private logger: LoggerService) {
+  protected constructor(private logger: LoggerService) {
     this._router = Router();
   }
 
