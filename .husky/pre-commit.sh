@@ -12,11 +12,11 @@ npm run format ||
 )
 
 # Check ESLint Standards
-npm run check-lint ||
+npm run lint ||
 (
-        echo '😤🏀👋😤 Get that weak s**t out of here! 😤🏀👋😤
-                ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.'
-        false;
+    echo '😤🏀👋😤 Get that weak s**t out of here! 😤🏀👋😤
+            ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.'
+    false;
 )
 
 # Check tsconfig standards
@@ -33,8 +33,7 @@ echo '🤔🤔🤔🤔... Alright... Code looks good to me... Trying to build no
 npm run build ||
 (
     echo '❌👷🔨❌ Better call Bob... Because your build failed ❌👷🔨❌
-            Next build failed: View the errors above to see why.
-    '
+            Next build failed: View the errors above to see why.'
     false;
 )
 
