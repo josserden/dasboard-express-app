@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { BaseController } from "common/base.controller";
 import { LoggerService } from "logger/logger.service";
 import { ROUTES } from "utils/constants";
+import { HttpError } from "errors/http-error";
 
 export class UsersController extends BaseController {
   constructor(logger: LoggerService) {
@@ -22,22 +23,10 @@ export class UsersController extends BaseController {
   }
 
   public register(req: Request, res: Response, next: NextFunction) {
-    if (!req.body?.username || !req.body?.password) {
-      next(new Error("Missing username or password"));
-
-      return;
-    }
-
-    return this.created(res, "register");
+    next(new HttpError(401, "Unauthorized", "register"));
   }
 
   public login(req: Request, res: Response, next: NextFunction) {
-    if (!req.body?.username || !req.body?.password) {
-      next(new Error("Missing username or password"));
-
-      return;
-    }
-
-    return this.ok(res, "login");
+    this.ok(res, "login");
   }
 }
