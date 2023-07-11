@@ -36,6 +36,11 @@ export class UsersController extends BaseController implements IUsersController 
         func: this.login,
         middlewares: [new ValidateMiddleware(UserLoginDto)],
       },
+      {
+        method: 'get',
+        path: ROUTES.LOGIN,
+        func: this.info,
+      },
     ]);
   }
 
@@ -72,6 +77,12 @@ export class UsersController extends BaseController implements IUsersController 
     const token = await this.signToken(body.email, secret);
 
     this.ok(res, token);
+  }
+
+  async info({ user }: Request, res: Response, next: NextFunction): Promise<void> {
+    this.ok(res, {
+      user,
+    });
   }
 
   private signToken(email: string, secret: string): Promise<string> {

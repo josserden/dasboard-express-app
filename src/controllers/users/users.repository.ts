@@ -4,8 +4,8 @@ import { UserModel } from '@prisma/client';
 import { User } from 'users/user.entity';
 
 import { IUsersRepository } from 'interface/users.repository.interface';
-import { DatabaseService } from '../common/database.service';
-import { TYPES } from '../utils/constants';
+import { DatabaseService } from 'common/database.service';
+import { TYPES } from 'utils/constants';
 
 @injectable()
 export class UsersRepository implements IUsersRepository {
