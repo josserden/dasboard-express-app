@@ -24,6 +24,10 @@ export class App {
     this.port = DEFAULT_PORT;
   }
 
+  useMiddlewares(): void {
+    this.app.use(express.json());
+  }
+
   useRoutes(): void {
     this.app.use(ROUTES.USERS, this.userController.router);
   }
@@ -33,6 +37,7 @@ export class App {
   }
 
   public async init(): Promise<void> {
+    this.useMiddlewares();
     this.useRoutes();
     this.useExceptionFilter();
 
