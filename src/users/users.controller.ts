@@ -46,7 +46,11 @@ export class UsersController extends BaseController implements IUsersController 
       return next(new HttpError(STATUS_CODE.UNPROCESSABLE_ENTITY, 'User is exist!', 'register'));
     }
 
-    this.ok(res, result);
+    this.created(res, {
+      email: result.email,
+      name: result.name,
+      id: result.id,
+    });
   }
 
   public login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction): void {

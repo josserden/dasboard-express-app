@@ -23,4 +23,5 @@ export const TYPES = {
   ILogger: Symbol.for('ILogger'),
   UsersController: Symbol.for('UsersController'),
   UsersService: Symbol.for('UsersService'),
+  UsersRepository: Symbol.for('UsersRepository'),
 };

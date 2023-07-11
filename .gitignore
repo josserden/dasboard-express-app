@@ -88,7 +88,5 @@ $RECYCLE.BIN/
 .Trashes
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
-
-# Database files
-/prisma/dev.db
-/prisma/dev.db
+prisma/dev.db
+prisma/dev.db-journal

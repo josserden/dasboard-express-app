@@ -14,6 +14,8 @@ import { ILogger } from 'interface/logger.interface';
 import { IUsersController } from 'interface/users.controller.interface';
 import { IUsersService } from 'interface/users.service.interface';
 import { IConfigService } from 'interface/config.service.interface';
+import { IUsersRepository } from './interface/users.repository.interface';
+import { UsersRepository } from './users/users.repository';
 
 export const appContainer = new Container();
 
@@ -24,5 +26,6 @@ export const appBindings = new ContainerModule(() => {
   appContainer.bind<IUsersService>(TYPES.UsersService).to(UsersService);
   appContainer.bind<DatabaseService>(TYPES.DatabaseService).to(DatabaseService).inSingletonScope();
   appContainer.bind<IExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter);
+  appContainer.bind<IUsersRepository>(TYPES.UsersRepository).to(UsersRepository).inSingletonScope();
   appContainer.bind<App>(TYPES.App).to(App);
 });
