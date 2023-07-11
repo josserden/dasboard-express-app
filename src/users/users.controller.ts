@@ -1,5 +1,5 @@
-import { inject, injectable } from 'inversify';
 import { NextFunction, Request, Response } from 'express';
+import { inject, injectable } from 'inversify';
 
 import { BaseController } from 'common/base.controller';
 import { HttpError } from 'errors/http-error';
@@ -31,6 +31,7 @@ export class UsersController extends BaseController implements IUsersController 
         method: 'post',
         path: ROUTES.LOGIN,
         func: this.login,
+        middlewares: [new ValidateMiddleware(UserLoginDto)],
       },
     ]);
   }
@@ -53,10 +54,18 @@ export class UsersController extends BaseController implements IUsersController 
     });
   }
 
-  public login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction): void {
-    console.log(req.body);
+  public async login(
+    { body }: Request<{}, {}, UserLoginDto>,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
+    const result = await this.usersService.validateUser(body);
 
-    this.ok(res, 'login');
-    next(new HttpError(STATUS_CODE.UNAUTHORIZED, 'Unauthorized', 'login'));
+    if (!result) {
+      return next(new HttpError(STATUS_CODE.UNAUTHORIZED, 'Unauthorized', 'login'));
+    }
+
+    // TODO: generate token
+    this.ok(res, 'You are logged in successfully!');
   }
 }
