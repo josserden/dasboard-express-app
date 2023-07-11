@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { inject, injectable } from 'inversify';
+import { sign } from 'jsonwebtoken';
 
 import { BaseController } from 'common/base.controller';
 import { HttpError } from 'errors/http-error';
@@ -11,12 +12,14 @@ import { ValidateMiddleware } from 'common/validateMiddleware';
 import { ILogger } from 'interface/logger.interface';
 import { IUsersController } from 'interface/users.controller.interface';
 import { IUsersService } from 'interface/users.service.interface';
+import { IConfigService } from 'interface/config.service.interface';
 
 @injectable()
 export class UsersController extends BaseController implements IUsersController {
   constructor(
     @inject(TYPES.ILogger) logger: ILogger,
     @inject(TYPES.UsersService) private usersService: IUsersService,
+    @inject(TYPES.ConfigService) private configService: IConfigService,
   ) {
     super(logger);
 
@@ -60,12 +63,36 @@ export class UsersController extends BaseController implements IUsersController 
     next: NextFunction,
   ): Promise<void> {
     const result = await this.usersService.validateUser(body);
+    const secret = this.configService.get('SECRET');
 
     if (!result) {
       return next(new HttpError(STATUS_CODE.UNAUTHORIZED, 'Unauthorized', 'login'));
     }
 
-    // TODO: generate token
-    this.ok(res, 'You are logged in successfully!');
+    const token = await this.signToken(body.email, secret);
+
+    this.ok(res, token);
+  }
+
+  private signToken(email: string, secret: string): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      sign(
+        {
+          email,
+          iat: new Date().getTime(),
+        },
+        secret,
+        {
+          algorithm: 'HS256',
+        },
+        (err, token): void => {
+          if (err) {
+            return reject(err);
+          }
+
+          return resolve(token as string);
+        },
+      );
+    });
   }
 }
