@@ -7,7 +7,7 @@ import { HttpError } from 'errors/http-error';
 import { ROUTES, STATUS_CODE, TYPES } from 'utils/constants';
 import { UserLoginDto } from 'users/dto/user-login.dto';
 import { UserRegisterDto } from 'users/dto/user-register.dto';
-import { ValidateMiddleware } from 'common/validateMiddleware';
+import { ValidateMiddleware } from 'common/validate.middleware';
 
 import { ILogger } from 'interface/logger.interface';
 import { IUsersController } from 'interface/users.controller.interface';
