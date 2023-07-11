@@ -5,14 +5,15 @@ import { sign } from 'jsonwebtoken';
 import { BaseController } from 'common/base.controller';
 import { HttpError } from 'errors/http-error';
 import { ROUTES, STATUS_CODE, TYPES } from 'utils/constants';
-import { UserLoginDto } from 'users/dto/user-login.dto';
-import { UserRegisterDto } from 'users/dto/user-register.dto';
+import { UserLoginDto } from 'controllers/users/dto/user-login.dto';
+import { UserRegisterDto } from 'controllers/users/dto/user-register.dto';
 import { ValidateMiddleware } from 'common/validate.middleware';
 
 import { ILogger } from 'interface/logger.interface';
 import { IUsersController } from 'interface/users.controller.interface';
 import { IUsersService } from 'interface/users.service.interface';
 import { IConfigService } from 'interface/config.service.interface';
+import { AuthGuard } from 'common/auth.guard';
 
 @injectable()
 export class UsersController extends BaseController implements IUsersController {
@@ -38,8 +39,9 @@ export class UsersController extends BaseController implements IUsersController 
       },
       {
         method: 'get',
-        path: ROUTES.LOGIN,
+        path: ROUTES.INFO,
         func: this.info,
+        middlewares: [new AuthGuard()],
       },
     ]);
   }
@@ -80,9 +82,9 @@ export class UsersController extends BaseController implements IUsersController 
   }
 
   async info({ user }: Request, res: Response, next: NextFunction): Promise<void> {
-    this.ok(res, {
-      user,
-    });
+    const userInfo = await this.usersService.getUserInfo(user);
+
+    this.ok(res, { email: userInfo?.email, name: userInfo?.name, id: userInfo?.id });
   }
 
   private signToken(email: string, secret: string): Promise<string> {

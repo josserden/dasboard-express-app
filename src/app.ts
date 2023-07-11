@@ -2,13 +2,14 @@ import express, { Express } from 'express';
 import { Server } from 'http';
 import { inject, injectable } from 'inversify';
 
+import { AuthMiddleware } from 'common/auth.middleware';
 import { DEFAULT_PORT, ROUTES, TYPES } from 'utils/constants';
-import { UsersController } from 'users/users.controller';
+import { DatabaseService } from 'common/database.service';
+import { UsersController } from 'controllers/users/users.controller';
 
-import { ILogger } from 'interface/logger.interface';
 import { IConfigService } from 'interface/config.service.interface';
 import { IExceptionFilter } from 'interface/exception.filter.interface';
-import { DatabaseService } from './common/database.service';
+import { ILogger } from 'interface/logger.interface';
 
 @injectable()
 export class App {
@@ -29,7 +30,10 @@ export class App {
   }
 
   useMiddlewares(): void {
+    const authMiddleware = new AuthMiddleware(this.configService.get('SECRET'));
+
     this.app.use(express.json());
+    this.app.use(authMiddleware.execute.bind(authMiddleware));
   }
 
   useRoutes(): void {

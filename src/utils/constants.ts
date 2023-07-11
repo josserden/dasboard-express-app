@@ -13,6 +13,7 @@ export const ROUTES = {
   USERS: '/users',
   LOGIN: '/login',
   REGISTER: '/register',
+  INFO: '/info',
 };
 
 export const TYPES = {

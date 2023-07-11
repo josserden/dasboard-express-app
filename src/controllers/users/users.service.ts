@@ -2,9 +2,9 @@ import { UserModel } from '@prisma/client';
 import { compare } from 'bcryptjs';
 import { inject, injectable } from 'inversify';
 
-import { User } from 'users/user.entity';
-import { UserLoginDto } from 'users/dto/user-login.dto';
-import { UserRegisterDto } from 'users/dto/user-register.dto';
+import { User } from 'controllers/users/user.entity';
+import { UserLoginDto } from 'controllers/users/dto/user-login.dto';
+import { UserRegisterDto } from 'controllers/users/dto/user-register.dto';
 import { TYPES } from 'utils/constants';
 
 import { IUsersService } from 'interface/users.service.interface';
@@ -38,5 +38,9 @@ export class UsersService implements IUsersService {
     if (!user) return false;
 
     return isPasswordValid;
+  }
+
+  async getUserInfo(email: string): Promise<UserModel | null> {
+    return this.usersRepository.find(email);
   }
 }

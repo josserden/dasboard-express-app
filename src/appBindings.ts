@@ -6,16 +6,16 @@ import { DatabaseService } from 'common/database.service';
 import { ExceptionFilter } from 'errors/exception.filter';
 import { LoggerService } from 'logger/logger.service';
 import { TYPES } from 'utils/constants';
-import { UsersController } from 'users/users.controller';
-import { UsersService } from 'users/users.service';
+import { UsersController } from 'controllers/users/users.controller';
+import { UsersService } from 'controllers/users/users.service';
+import { UsersRepository } from 'controllers/users/users.repository';
 
 import { IExceptionFilter } from 'interface/exception.filter.interface';
 import { ILogger } from 'interface/logger.interface';
 import { IUsersController } from 'interface/users.controller.interface';
 import { IUsersService } from 'interface/users.service.interface';
 import { IConfigService } from 'interface/config.service.interface';
-import { IUsersRepository } from './interface/users.repository.interface';
-import { UsersRepository } from './users/users.repository';
+import { IUsersRepository } from 'interface/users.repository.interface';
 
 export const appContainer = new Container();
 
