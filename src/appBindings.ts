@@ -6,9 +6,9 @@ import { DatabaseService } from 'common/database.service';
 import { ExceptionFilter } from 'errors/exception.filter';
 import { LoggerService } from 'logger/logger.service';
 import { TYPES } from 'utils/constants';
-import { UsersController } from 'controllers/users/users.controller';
-import { UsersService } from 'controllers/users/users.service';
-import { UsersRepository } from 'controllers/users/users.repository';
+import { UsersController } from 'users/users.controller';
+import { UsersService } from 'users/users.service';
+import { UsersRepository } from 'users/users.repository';
 
 import { IExceptionFilter } from 'interface/exception.filter.interface';
 import { ILogger } from 'interface/logger.interface';

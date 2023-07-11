@@ -2,10 +2,10 @@ import { UserModel } from '@prisma/client';
 import { compare } from 'bcryptjs';
 import { inject, injectable } from 'inversify';
 
-import { User } from 'controllers/users/user.entity';
-import { UserLoginDto } from 'controllers/users/dto/user-login.dto';
-import { UserRegisterDto } from 'controllers/users/dto/user-register.dto';
-import { TYPES } from 'utils/constants';
+import { User } from './user.entity';
+import { UserLoginDto } from './dto/user-login.dto';
+import { UserRegisterDto } from './dto/user-register.dto';
+import { TYPES } from '../utils/constants';
 
 import { IUsersService } from 'interface/users.service.interface';
 import { IConfigService } from 'interface/config.service.interface';

@@ -5,8 +5,8 @@ import { sign } from 'jsonwebtoken';
 import { BaseController } from 'common/base.controller';
 import { HttpError } from 'errors/http-error';
 import { ROUTES, STATUS_CODE, TYPES } from 'utils/constants';
-import { UserLoginDto } from 'controllers/users/dto/user-login.dto';
-import { UserRegisterDto } from 'controllers/users/dto/user-register.dto';
+import { UserLoginDto } from 'users/dto/user-login.dto';
+import { UserRegisterDto } from 'users/dto/user-register.dto';
 import { ValidateMiddleware } from 'common/validate.middleware';
 
 import { ILogger } from 'interface/logger.interface';

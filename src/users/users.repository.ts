@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { UserModel } from '@prisma/client';
 
-import { User } from 'controllers/users/user.entity';
+import { User } from 'users/user.entity';
 import { DatabaseService } from 'common/database.service';
 import { TYPES } from 'utils/constants';
 

@@ -5,7 +5,7 @@ import { inject, injectable } from 'inversify';
 import { AuthMiddleware } from 'common/auth.middleware';
 import { DEFAULT_PORT, ROUTES, TYPES } from 'utils/constants';
 import { DatabaseService } from 'common/database.service';
-import { UsersController } from 'controllers/users/users.controller';
+import { UsersController } from 'users/users.controller';
 
 import { IConfigService } from 'interface/config.service.interface';
 import { IExceptionFilter } from 'interface/exception.filter.interface';
