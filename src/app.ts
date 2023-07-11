@@ -3,10 +3,11 @@ import { Server } from 'http';
 import { inject, injectable } from 'inversify';
 
 import { DEFAULT_PORT, ROUTES, TYPES } from 'utils/constants';
-import { ExceptionFilter } from 'errors/exception.filter';
 import { UsersController } from 'users/users.controller';
 
 import { ILogger } from 'interface/logger.interface';
+import { IConfigService } from 'interface/config.service.interface';
+import { IExceptionFilter } from 'interface/exception.filter.interface';
 
 @injectable()
 export class App {
@@ -16,9 +17,10 @@ export class App {
 
   constructor(
     @inject(TYPES.ILogger) private logger: ILogger,
-    @inject(TYPES.ExceptionFilter)
-    private exceptionFilter: ExceptionFilter,
+    @inject(TYPES.ExceptionFilter) private exceptionFilter: IExceptionFilter,
     @inject(TYPES.UsersController) private userController: UsersController,
+    // @ts-ignore
+    @inject(TYPES.ConfigService) private configService: IConfigService,
   ) {
     this.app = express();
     this.port = DEFAULT_PORT;

@@ -17,6 +17,7 @@ export const ROUTES = {
 
 export const TYPES = {
   App: Symbol.for('App'),
+  ConfigService: Symbol.for('ConfigService'),
   ExceptionFilter: Symbol.for('ExceptionFilter'),
   ILogger: Symbol.for('ILogger'),
   UsersController: Symbol.for('UsersController'),
