@@ -8,6 +8,7 @@ import { UsersController } from 'users/users.controller';
 import { ILogger } from 'interface/logger.interface';
 import { IConfigService } from 'interface/config.service.interface';
 import { IExceptionFilter } from 'interface/exception.filter.interface';
+import { DatabaseService } from './common/database.service';
 
 @injectable()
 export class App {
@@ -21,6 +22,7 @@ export class App {
     @inject(TYPES.UsersController) private userController: UsersController,
     // @ts-ignore
     @inject(TYPES.ConfigService) private configService: IConfigService,
+    @inject(TYPES.DatabaseService) private databaseService: DatabaseService,
   ) {
     this.app = express();
     this.port = DEFAULT_PORT;
@@ -39,6 +41,8 @@ export class App {
   }
 
   public async init(): Promise<void> {
+    await this.databaseService.connect();
+
     this.useMiddlewares();
     this.useRoutes();
     this.useExceptionFilter();

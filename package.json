@@ -12,7 +12,8 @@
     "format": "prettier --write \"src/**/*.ts\" ",
     "check-types": "tsc --noEmit",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prisma": "prisma generate"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   },
   "homepage": "https://github.com/josserden/dasboard-express-app#readme",
   "dependencies": {
+    "@prisma/client": "^4.16.2",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
@@ -47,6 +49,7 @@
     "husky": "^8.0.0",
     "nodemon": "^2.0.22",
     "prettier": "^3.0.0",
+    "prisma": "^4.16.2",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.6"

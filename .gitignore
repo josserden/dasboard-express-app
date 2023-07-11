@@ -16,6 +16,7 @@ yarn-error.log*
 /.pnp
 .pnp.js
 
+
 # Yarn Integrity file
 .yarn-integrity
 
@@ -87,3 +88,7 @@ $RECYCLE.BIN/
 .Trashes
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
+
+# Database files
+/prisma/dev.db
+/prisma/dev.db
